@@ -1,6 +1,7 @@
 package com.ecomerce.sb_ecom.exceptions;
 
 
+import com.ecomerce.sb_ecom.payload.APIResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,7 +15,6 @@ import java.util.Map;
 @RestControllerAdvice // speciallised version of ControllerAdvice used for centralised error handling
 // converts exception into json automatically
 public class MyGlobalExceptionHandler {
-
     @ExceptionHandler(MethodArgumentNotValidException.class) // intercepts MethodArgumentNotValidException class
     public ResponseEntity<Map<String,String>> myMethodArgumentNotValidException(MethodArgumentNotValidException e){
         Map<String,String> response = new HashMap<>();
@@ -29,14 +29,16 @@ public class MyGlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class) // custom class which we create to throw exception
     // this exceptionHandler will interpret the class ResourceNotFoundException after setting the arguments
-    public ResponseEntity<String> myResourceNotFoundException(ResourceNotFoundException e){
+    public ResponseEntity<APIResponse> myResourceNotFoundException(ResourceNotFoundException e){
         String message=e.getMessage();
-        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        APIResponse response=new APIResponse(message,false);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
     @ExceptionHandler(APIException.class)
-    public ResponseEntity<String> myAPIException(APIException e){
+    public ResponseEntity<APIResponse> myAPIException(APIException e){
         String message=e.getMessage();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        APIResponse response=new APIResponse(message,false);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
 }
