@@ -37,7 +37,6 @@ public class categoryController {
             @RequestParam(name="sortBy",defaultValue=AppConstant.SORT_BY,required=false) String sortBy,
             @RequestParam(name="sortOrder",defaultValue=AppConstant.SORT_ORDER,required=false) String sortOrder
     ) {
-
         CategoryResponse categoryResponse=categoryService.getAllCategories(pageNumber,pageSize,sortBy,sortOrder);
         return ResponseEntity.status(HttpStatus.OK).body(categoryResponse);
     }
@@ -50,7 +49,7 @@ public class categoryController {
 
     @DeleteMapping("/adimin/deleteCategory/{CategoryId}")
     public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable Long CategoryId) {
-            CategoryDTO categoryDTO =categoryDTO=categoryService.deleteCategory(CategoryId);
+            CategoryDTO categoryDTO =categoryService.deleteCategory(CategoryId);
             //return new ResponseEntity<>(response, HttpStatus.OK);
             //return ResponseEntity.ok(response);
             return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice // speciallised version of ControllerAdvice used for centralised error handling
+@RestControllerAdvice // specialised version of ControllerAdvice used for centralised error handling
 // converts exception into json automatically
 public class MyGlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class) // intercepts MethodArgumentNotValidException class

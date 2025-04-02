@@ -37,6 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
                 :Sort.by(sortBy).descending();
         Pageable pageDetails= PageRequest.of(pageNumber,pageSize,sortByAndOrder);
         Page<Category> categoryPage=categoryRepository.findAll(pageDetails);
+        //System.out.println("hii"+categoryPage);
         List<Category> categories=categoryPage.getContent();
         if(categories.isEmpty()){
             throw new APIException("No Category added till now !!!");
