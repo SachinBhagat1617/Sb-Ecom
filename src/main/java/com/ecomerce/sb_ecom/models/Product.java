@@ -8,11 +8,14 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="products")
+@ToString
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,5 +46,11 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name="category_id") // foreign Key
-    private Category category;
+    private Category category;  //this is the owning side the side which contains foreign key and it has many to one relation ship
+
+    @ManyToOne
+    @JoinColumn(name="seller_id")
+    private User user;
+
+
 }

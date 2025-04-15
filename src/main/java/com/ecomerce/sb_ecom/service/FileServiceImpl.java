@@ -19,7 +19,7 @@ public class FileServiceImpl implements FileService {
         // Generate a unique file name
         String randomId= UUID.randomUUID().toString(); //12354
         String fileName=randomId.concat(originalFilename.substring(originalFilename.lastIndexOf("."))); //.jpg
-        String filePath=path+ File.separator+fileName; //  File.separator -> \  (we explicitlly mention it because if we directly write / then it wont be understand by Linux
+        String filePath=path+ File.separator+fileName; //  File.separator -> \  (we explicitly mention it because if we directly write / then it won't be understood by Linux
         System.out.println(filePath);//images/\c9e66400-7be3-4abb-893b-d2621c5008db.jpg
 
         // Check if a path exist and create
