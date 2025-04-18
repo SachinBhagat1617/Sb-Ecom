@@ -10,6 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,14 +35,8 @@ public class Product {
     @Size(min = 6, message = "productDescriptions must be atleast of 6 chars")
     private String description;
 
-    @NotNull
-    @Positive
     private Integer quantity;
-
-    @NotNull(message = "Price cannot be null") // Ensures price is provided
-    @Positive(message = "Price must be greater than zero") // Ensures price is positive
     private double price;
-
     private double discount;
     private double specialPrice;
 
@@ -52,5 +49,7 @@ public class Product {
     @JoinColumn(name="seller_id")
     private User user;
 
+    @OneToMany(mappedBy = "product",cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
+    private List<CartItem> products=new ArrayList<>();
 
 }

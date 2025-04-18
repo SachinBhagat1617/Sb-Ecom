@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 
 import java.util.List;
 
@@ -15,14 +17,15 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long CategoryId;
+    private Long CategoryId;
 
     @NotBlank
     @Size(min=3,message = "Name must contain atleast 3 characters")
     private String categoryName;
 
     @OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)//the ownership stays with he foreign_key side
-    public List<Product> getProducts; // mapped_by tells that category will not be the owner and will be taken care by product
+    @ToString.Exclude
+    public List<Product> products; // mapped_by tells that category will not be the owner and will be taken care by product
 
 
 /*In your Category model, the constructor is never explicitly called in your code, yet the CategoryId and name values are still being set.

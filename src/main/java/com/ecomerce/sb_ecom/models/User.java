@@ -81,6 +81,9 @@ This approach relies on Hibernate/JPA to populate the collection when loading fr
 
 Use this when: You’re confident that JPA will always initialize this collection before you access it.*/
 
+    @ToString.Exclude
+    @OneToOne(mappedBy ="user",cascade = {CascadeType.PERSIST,CascadeType.MERGE},orphanRemoval = true)
+    private Cart cart;
 
 
 

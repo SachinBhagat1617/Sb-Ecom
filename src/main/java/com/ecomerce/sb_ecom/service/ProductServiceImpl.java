@@ -8,6 +8,7 @@ import com.ecomerce.sb_ecom.payload.ProductDTO;
 import com.ecomerce.sb_ecom.payload.ProductResponse;
 import com.ecomerce.sb_ecom.repositories.CategoryRepository;
 import com.ecomerce.sb_ecom.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+@Transactional
 @Service
 public class ProductServiceImpl implements ProductService {
+
 
     @Autowired
     private ProductRepository productRepository;
@@ -40,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO addProduct(ProductDTO productDTO, Long categoryId) {
         Category category=categoryRepository.findById(categoryId)
                 .orElseThrow(()->new ResourceNotFoundException("Category","CategoryId",categoryId));
-        List<Product> products=category.getProducts;
+        List<Product> products=category.getProducts();
         //System.out.println(products);
         for(Product product:products){
             if(product.getProductName().equals(productDTO.getProductName())){
